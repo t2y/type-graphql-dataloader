@@ -69,7 +69,7 @@ async function handler<V>(
   return (await dataloader.load(JSON.stringify(pk))) ?? null;
 }
 
-class ToOneDataloader<V> extends DataLoader<string, V | V[]> {
+class ToOneDataloader<V> extends DataLoader<string, V> {
   constructor(relation: RelationMetadata, connection: Connection) {
     super(async (ids) => {
       const relationName = relation.inverseRelation!.propertyName;
@@ -92,7 +92,7 @@ class ToOneDataloader<V> extends DataLoader<string, V | V[]> {
   }
 }
 
-class OnetoOneNotOwnerDataloader<V> extends DataLoader<string, V | V[]> {
+class OnetoOneNotOwnerDataloader<V> extends DataLoader<string, V> {
   constructor(relation: RelationMetadata, connection: Connection) {
     super(async (ids) => {
       const inverseRelation = relation.inverseRelation!;
@@ -116,7 +116,7 @@ class OnetoOneNotOwnerDataloader<V> extends DataLoader<string, V | V[]> {
   }
 }
 
-class OneToManyDataloader<V> extends DataLoader<string, V | V[]> {
+class OneToManyDataloader<V> extends DataLoader<string, V[]> {
   constructor(relation: RelationMetadata, connection: Connection) {
     super(async (ids) => {
       const inverseRelation = relation.inverseRelation!;
@@ -140,7 +140,7 @@ class OneToManyDataloader<V> extends DataLoader<string, V | V[]> {
   }
 }
 
-class ManyToManyDataloader<V> extends DataLoader<string, V | V[]> {
+class ManyToManyDataloader<V> extends DataLoader<string, V[]> {
   constructor(relation: RelationMetadata, connection: Connection) {
     super(async (ids) => {
       const inversePropName = relation.inverseRelation!.propertyName;

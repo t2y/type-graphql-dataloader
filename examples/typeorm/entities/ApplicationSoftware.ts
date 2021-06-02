@@ -4,7 +4,6 @@ import { Entity, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
 import { Lazy } from "../types/Lazy";
 import { Base } from "./Base";
 import { Company } from "./Company";
-import { Desk } from "./Desk";
 import { PersonalComputer } from "./PersonalComputer";
 
 @ObjectType()
@@ -27,7 +26,7 @@ export class ApplicationSoftware extends Base<ApplicationSoftware> {
   @TypeormLoader()
   installedComputers: PersonalComputer[];
 
-  @Field((type) => [Company])
+  @Field((type) => Company)
   @ManyToOne((type) => Company, (company) => company.publishedApps, {
     lazy: true,
   })
